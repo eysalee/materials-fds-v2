@@ -1,84 +1,117 @@
 from datascience import *
 import numpy as np
 
-def correctness_check_1_1(one_resampled_percentage,votes):
+def correctness_check_1_1_a(q1_1_percentage):
     try:
-        np.random.seed(123)
-        return bool(np.isclose(one_resampled_percentage(votes), 52.400000000000006))
+        return np.isclose(q1_1_percentage, 93.75)
     except Exception:
         return False
     
-def correctness_check_1_2_1(percentages_in_resamples):
+def correctness_check_1_1_b(q1_1_reasoning):
     try:
-        np.random.seed(123)
-        return bool(np.isclose(percentages_in_resamples().item(0), 52.400000000000006))
+        return (1 in q1_1_reasoning) and (3 in q1_1_reasoning) and (len(q1_1_reasoning) == 2)
+    except Exception:
+        return False
+    
+def correctness_check_1_2_a(q1_2_percentage):
+    try:
+        return np.isclose(q1_2_percentage, 6.25)
     except Exception:
         return False
 
-def correctness_check_1_2_2(percentages_in_resamples):
+def correctness_check_1_2_b(q1_2_reasoning):
     try:
-        np.random.seed(123)
-        return bool(np.isclose(percentages_in_resamples().item(10), 51.33333333333333))
+        return np.isclose(q1_2_reasoning, 1)
     except Exception:
         return False
     
-def correctness_check_1_3(imm_lower_bound,imm_upper_bound,resampled_percentages):
+def correctness_check_1_3_a(q1_3_percentage):
     try:
-        return bool(all([imm_lower_bound == percentile(2.5, resampled_percentages), imm_upper_bound == percentile(97.5, resampled_percentages)]))
+        return np.isclose(q1_3_percentage, 6.25)
     except Exception:
         return False
 
-def correctness_check_1_4(one_resampled_difference,votes):
+def correctness_check_1_3_b(q1_3_reasoning):
     try:
-        np.random.seed(123)
-        return bool(-6 <= float(one_resampled_difference(votes)) <= 15)
-    except Exception:
-        return False
-    
-def correctness_check_1_6_1(diff_lower_bound,diff_upper_bound):
-    try:
-        return bool(-1.8 <= diff_lower_bound <= diff_upper_bound <= 13.4)
-    except Exception:
-        return False
-    
-def correctness_check_1_6_2(diff_lower_bound,diff_upper_bound,sampled_leads):
-    try:
-        return bool(all([diff_lower_bound == percentile(2.5, sampled_leads), diff_upper_bound == percentile(97.5, sampled_leads)]))
+        return np.isclose(q1_3_reasoning, 4)
     except Exception:
         return False
 
-def correctness_check_2_1(CI_70_percent,CI_90_percent,CI_99_percent):
+
+def correctness_check_2_1(smallest):
     try:
-        return (CI_70_percent == 2) and (CI_90_percent == 3) and (CI_99_percent == 1)
+        return smallest == 1112
     except Exception:
         return False
     
-def correctness_check_2_2(confidence_answers):
+def correctness_check_2_2(sample_size_answer):
     try:
-        return (1 in confidence_answers) and (2 in confidence_answers) and (len(confidence_answers)==2)
+        return sample_size_answer == 2
+    except Exception:
+        return False
+    
+def correctness_check_2_3(smallest_num):
+    try:
+        return smallest_num == 757
+    except Exception:
+        return False
+    
+def correctness_check_2_4(sd_answers):
+    try:
+        return (1 in sd_answers) and (5 in sd_answers) and (len(sd_answers) == 2)
     except Exception:
         return False
 
-def correctness_check_2_3(true_percentage_intervals):
+def correctness_check_2_5(option):
     try:
-        return bool(int(true_percentage_intervals) == 5700)
+        return option == 4
     except Exception:
         return False
     
-def correctness_check_2_4(cutoff_five_percent):
+def correctness_check_3_2(clt_answers):
     try:
-        return bool(cutoff_five_percent == 1)
+        return (1 in clt_answers) and (2 in clt_answers) and (4 in clt_answers) and (len(clt_answers)==3)
     except Exception:
         return False
     
-def correctness_check_2_5(cutoff_one_percent):
+def correctness_check_3_3(approximate_sd):
     try:
-        return bool(cutoff_one_percent == 3)
+        return np.isclose(approximate_sd, ((210/400) * (190/400) / 400) ** 0.5)
     except Exception:
         return False
     
-def correctness_check_2_6(cutoff_ten_percent):
+def correctness_check_3_4(exact_sd):
     try:
-        return bool(cutoff_ten_percent == 1)
+        return 0.02 <= exact_sd <= 0.03
+    except Exception:
+        return False
+
+def correctness_check_3_5_lower(lower_limit):
+    try:
+        return np.isclose(lower_limit, 0.47506253911140456)
+    except Exception:
+        return False
+    
+def correctness_check_3_5_upper(upper_limit):
+    try:
+        return np.isclose(upper_limit, 0.5749374608885954)
+    except Exception:
+        return False
+    
+def correctness_check_3_6(marissa_sample_mean_sd):
+    try:
+        return np.isclose(marissa_sample_mean_sd, .005)
+    except Exception:
+        return False
+    
+def correctness_check_3_7(smaller_sample_mean_sd):
+    try:
+        return smaller_sample_mean_sd > .005
+    except Exception:
+        return False
+    
+def correctness_check_3_8(larger_sample_mean_sd):
+    try:
+        return larger_sample_mean_sd < .005
     except Exception:
         return False

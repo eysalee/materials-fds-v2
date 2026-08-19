@@ -1,122 +1,149 @@
 from datascience import *
 import numpy as np
 
-def correctness_check_1_11(dollar_bet_on_red):
+def correctness_check_1_2(statistic_choice):
     try:
-        return dollar_bet_on_red('red') == 1
+        return statistic_choice == 3
     except Exception:
         return False
 
-def correctness_check_1_12(dollar_bet_on_red):
+def first_element_check(deck_model_probabilities):
     try:
-        return dollar_bet_on_red('green') == -1
+        return deck_model_probabilities.item(0) == 4/13
     except Exception:
         return False
 
-def correctness_check_1_2(wheel):
+def second_element_check(deck_model_probabilities):
     try:
-        return sum(wheel.column("Winnings: Red")) == -2
+        return deck_model_probabilities.item(1) == 9/13
+    except Exception:
+        return False
+    
+def sample_size_check(sample_size):
+    try:
+        return sample_size == 318
     except Exception:
         return False
 
-def correctness_check_1_3(ten_bets):
+def percentv1_check(percent_V1):
     try:
-        return ten_bets.num_rows == 10
+        return np.isclose(percent_V1, 66.35220125786164)
     except Exception:
         return False
 
-def correctness_check_1_4(net_gain_red):
+def correctness_check_1_5(jade_conclusions):
     try:
-        return -10000 <= net_gain_red(10000) <= 10000
+        return jade_conclusions.item(0) == 1 and jade_conclusions.item(1) == 2 and jade_conclusions.item(2) == 5
+    except Exception:
+        return False
+    
+def correctness_check_2_2(vaccine_null):
+    try:
+        return vaccine_null == 1
     except Exception:
         return False
 
-def correctness_check_1_51(simulated_gains_red):
+def correctness_check_2_3(vaccine_alt):
     try:
-        return len(simulated_gains_red) == 10000
+        return vaccine_alt == 4
+    except Exception:
+        return False
+    
+def correctness_check_2_4(valid_test_stat):
+    try:
+        return valid_test_stat == 4
+    except Exception:
+        return False
+    
+def correctness_check_2_5(observed_statistic):
+    try:
+        return np.isclose(observed_statistic, 6.352201257861637)
+    except Exception:
+        return False
+    
+def correctness_check_2_6(assumption_needed):
+    try:
+        return assumption_needed == 1
+    except Exception:
+        return False
+    
+def correctness_check_2_8(assumption_needed):
+    try:
+        return assumption_needed == 1
+    except Exception:
+        return False
+    
+def correctness_check_2_8(p_value):
+    try:
+        return 0.016 < p_value < 0.026
+    except Exception:
+        return False
+    
+def correctness_check_3_1(a,b,c,d,e):
+    try:
+        return a == 4 and b == 1 and c == 3 and d == 7 and e == 2
+    except Exception:
+        return False
+    
+def correctness_check_3_5(pvalue_answers):
+    try:
+        return sum(pvalue_answers == make_array(1,3)) == 2
     except Exception:
         return False
 
-def correctness_check_1_52(simulated_gains_red):
+def correctness_check_3_6(conclusion_answers):
     try:
-        return np.count_nonzero(simulated_gains_red <= 100) == 10000
+        return sum(conclusion_answers == make_array(2,5)) == 2
     except Exception:
         return False
-
-def correctness_check_1_71(dollar_bet_on_split):
+    
+def correctness_check_4_1(num_females):
     try:
-        return dollar_bet_on_split('6') == 17
+        return num_females == 260
     except Exception:
         return False
-
-def correctness_check_1_72(dollar_bet_on_split):
+    
+def correctness_check_4_2(avg_male_vs_female):
     try:
-        return dollar_bet_on_split('10') == -1
+        return avg_male_vs_female == True
     except Exception:
         return False
-
-def correctness_check_1_8(wheel):
+    
+def correctness_check_4_3(null_statement_number,alternative_statement_number):
     try:
-        return sum(wheel.column("Winnings: Split")) == -2
+        return (null_statement_number == 2) and (alternative_statement_number == 5)
     except Exception:
         return False
-
-def correctness_check_1_91(simulated_gains_split):
+    
+def correctness_check_4_6(observed_statistic_ab):
     try:
-        return len(simulated_gains_split) == 10000
+        return np.isclose(observed_statistic_ab, 1.314102564102562)
     except Exception:
         return False
-
-def correctness_check_1_92(simulated_gains_split):
+    
+def correctness_check_4_7(original_with_shuffled_labels):
     try:
-        return np.count_nonzero(simulated_gains_split >= -200) == 10000
+        same_3_7 = original_with_shuffled_labels.column("Age") != original_with_shuffled_labels.column("Shuffled Label")
+        if type(same_3_7) == np.ndarray:
+            same_3_7 = all(same_3_7)
+        return same_3_7
     except Exception:
         return False
-
-def correctness_check_1_10(histogram_statements):
+    
+def correctness_check_4_10(simulated_statistics_ab):
     try:
-        return (histogram_statements.item(0) == 1 and
-                histogram_statements.item(1) == 2 and
-                histogram_statements.item(2) == 3)
+        return len(simulated_statistics_ab) == 5000
     except Exception:
         return False
-
-def correctness_check_2_1(first_three_black):
+    
+def correctness_check_4_11(p_val):
     try:
-        return 0.106 == round(first_three_black, 3)
+        return 0.10 < p_val < 0.15
     except Exception:
         return False
-
-def correctness_check_2_2(no_green):
+    
+def conclusion_check(conclusion):
     try:
-        return 0.582 < no_green < 0.583
-    except Exception:
-        return False
-
-def correctness_check_2_3(at_least_one_green):
-    try:
-        return 0.417643346770 <= at_least_one_green <= 0.417643346771
-    except Exception:
-        return False
-
-def correctness_check_2_4(lone_winners):
-    try:
-        return 0.0011 == round(lone_winners, 4)
-    except Exception:
-        return False
-
-def correctness_check_3_1(movie_frequency_answer):
-    try:
-        if len(movie_frequency_answer) != 3:
-            return False
-        return sum(movie_frequency_answer == make_array(1,4,5)) == 3
-    except Exception:
-        return False
-
-def correctness_check_3_2(same_studio_answer):
-    try:
-        if len(same_studio_answer) != 2:
-            return False
-        return sum(same_studio_answer == make_array(1,4)) == 2
+        return conclusion == 'The data are consistent with the null hypothesis.'
     except Exception:
         return False

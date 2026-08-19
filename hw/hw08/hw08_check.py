@@ -1,117 +1,106 @@
 from datascience import *
 import numpy as np
 
-def correctness_check_1_1_a(q1_1_percentage):
+def correctness_check_1_1(standard_units):
     try:
-        return np.isclose(q1_1_percentage, 93.75)
+        return standard_units([-3, -2, 1, 0, 1, 2, 3])
     except Exception:
         return False
     
-def correctness_check_1_1_b(q1_1_reasoning):
+def correctness_check_1_2(standard_array):
     try:
-        return (1 in q1_1_reasoning) and (3 in q1_1_reasoning) and (len(q1_1_reasoning) == 2)
+        correct = [2,3,4,5]
+        incorrect = [1]
+        return all(x in standard_array for x in correct) and all(x not in standard_array for x in incorrect)
     except Exception:
         return False
     
-def correctness_check_1_2_a(q1_2_percentage):
+def correctness_check_1_3(correlation):
     try:
-        return np.isclose(q1_2_percentage, 6.25)
+        return bool(np.isclose(correlation([-3, 0, 3], [-3, 0, 3]), 1.0000000000000002))
     except Exception:
         return False
 
-def correctness_check_1_2_b(q1_2_reasoning):
+def correctness_check_1_4(r_array):
     try:
-        return np.isclose(q1_2_reasoning, 1)
+        correct = [1,2,3,4]
+        incorrect = [5]
+        return all(x in r_array for x in correct) and all(x not in r_array for x in incorrect)
     except Exception:
         return False
     
-def correctness_check_1_3_a(q1_3_percentage):
+def correctness_check_1_5(slope):
     try:
-        return np.isclose(q1_3_percentage, 6.25)
-    except Exception:
-        return False
-
-def correctness_check_1_3_b(q1_3_reasoning):
-    try:
-        return np.isclose(q1_3_reasoning, 4)
-    except Exception:
-        return False
-
-
-def correctness_check_2_1(smallest):
-    try:
-        return smallest == 1112
+        return bool(np.isclose(slope([-2, 4], [3, -6]), -1.5))
     except Exception:
         return False
     
-def correctness_check_2_2(sample_size_answer):
+def correctness_check_1_6(slope_array):
     try:
-        return sample_size_answer == 2
+        correct = [2,4,5]
+        incorrect = [1,3]
+        return all(x in slope_array for x in correct) and all(x not in slope_array for x in incorrect)
     except Exception:
         return False
     
-def correctness_check_2_3(smallest_num):
+def correctness_check_1_7(intercept):
     try:
-        return smallest_num == 757
+        return bool(np.isclose(intercept([1, 3], [2, 5]), 0.5))
     except Exception:
         return False
     
-def correctness_check_2_4(sd_answers):
+def correctness_check_1_8(intercept_array):
     try:
-        return (1 in sd_answers) and (5 in sd_answers) and (len(sd_answers) == 2)
-    except Exception:
-        return False
-
-def correctness_check_2_5(option):
-    try:
-        return option == 4
+        correct = [1,4]
+        incorrect = [2,3,5]
+        return all(x in intercept_array for x in correct) and all(x not in intercept_array for x in incorrect)
     except Exception:
         return False
     
-def correctness_check_3_2(clt_answers):
+def correctness_check_2_2(r_guess):
     try:
-        return (1 in clt_answers) and (2 in clt_answers) and (4 in clt_answers) and (len(clt_answers)==3)
+        return bool(r_guess == -0.75)
     except Exception:
         return False
     
-def correctness_check_3_3(approximate_sd):
+def correctness_check_2_4(regression_answers):
     try:
-        return np.isclose(approximate_sd, ((210/400) * (190/400) / 400) ** 0.5)
+        correct = [1,3,6]
+        incorrect = [2,4,5]
+        return all(x in regression_answers for x in correct) and all(x not in regression_answers for x in incorrect)
     except Exception:
         return False
     
-def correctness_check_3_4(exact_sd):
+def correctness_check_2_6(plot_comparison):
     try:
-        return 0.02 <= exact_sd <= 0.03
-    except Exception:
-        return False
-
-def correctness_check_3_5_lower(lower_limit):
-    try:
-        return np.isclose(lower_limit, 0.47506253911140456)
+        correct = [1,3]
+        incorrect = [2,4]
+        return all(x in plot_comparison for x in correct) and all(x not in plot_comparison for x in incorrect)
     except Exception:
         return False
     
-def correctness_check_3_5_upper(upper_limit):
+def correctness_check_2_7(rmse):
     try:
-        return np.isclose(upper_limit, 0.5749374608885954)
+        return bool(np.isclose(rmse(10, 15), 76003670.150502235))
     except Exception:
         return False
     
-def correctness_check_3_6(marissa_sample_mean_sd):
+def correctness_check_2_9(rmse_reasoning):
     try:
-        return np.isclose(marissa_sample_mean_sd, .005)
+        return rmse_reasoning == 2
     except Exception:
         return False
     
-def correctness_check_3_7(smaller_sample_mean_sd):
+def correctness_check_2_10(error_array):
     try:
-        return smaller_sample_mean_sd > .005
+        return bool(error_array.item(0) == 2 and error_array.item(1) == 4)
     except Exception:
         return False
     
-def correctness_check_3_8(larger_sample_mean_sd):
+def correctness_check_2_11(scoring_array):
     try:
-        return larger_sample_mean_sd < .005
+        correct = [1,3]
+        incorrect = [2,4]
+        return all(x in scoring_array for x in correct) and all(x not in scoring_array for x in incorrect)
     except Exception:
         return False

@@ -1,149 +1,84 @@
 from datascience import *
 import numpy as np
 
-def correctness_check_1_2(statistic_choice):
+def correctness_check_1_1(one_resampled_percentage,votes):
     try:
-        return statistic_choice == 3
+        np.random.seed(123)
+        return bool(np.isclose(one_resampled_percentage(votes), 52.400000000000006))
+    except Exception:
+        return False
+    
+def correctness_check_1_2_1(percentages_in_resamples):
+    try:
+        np.random.seed(123)
+        return bool(np.isclose(percentages_in_resamples().item(0), 52.400000000000006))
     except Exception:
         return False
 
-def first_element_check(deck_model_probabilities):
+def correctness_check_1_2_2(percentages_in_resamples):
     try:
-        return deck_model_probabilities.item(0) == 4/13
+        np.random.seed(123)
+        return bool(np.isclose(percentages_in_resamples().item(10), 51.33333333333333))
+    except Exception:
+        return False
+    
+def correctness_check_1_3(imm_lower_bound,imm_upper_bound,resampled_percentages):
+    try:
+        return bool(all([imm_lower_bound == percentile(2.5, resampled_percentages), imm_upper_bound == percentile(97.5, resampled_percentages)]))
     except Exception:
         return False
 
-def second_element_check(deck_model_probabilities):
+def correctness_check_1_4(one_resampled_difference,votes):
     try:
-        return deck_model_probabilities.item(1) == 9/13
+        np.random.seed(123)
+        return bool(-6 <= float(one_resampled_difference(votes)) <= 15)
     except Exception:
         return False
     
-def sample_size_check(sample_size):
+def correctness_check_1_6_1(diff_lower_bound,diff_upper_bound):
     try:
-        return sample_size == 318
+        return bool(-1.8 <= diff_lower_bound <= diff_upper_bound <= 13.4)
+    except Exception:
+        return False
+    
+def correctness_check_1_6_2(diff_lower_bound,diff_upper_bound,sampled_leads):
+    try:
+        return bool(all([diff_lower_bound == percentile(2.5, sampled_leads), diff_upper_bound == percentile(97.5, sampled_leads)]))
     except Exception:
         return False
 
-def percentv1_check(percent_V1):
+def correctness_check_2_1(CI_70_percent,CI_90_percent,CI_99_percent):
     try:
-        return np.isclose(percent_V1, 66.35220125786164)
+        return (CI_70_percent == 2) and (CI_90_percent == 3) and (CI_99_percent == 1)
+    except Exception:
+        return False
+    
+def correctness_check_2_2(confidence_answers):
+    try:
+        return (1 in confidence_answers) and (2 in confidence_answers) and (len(confidence_answers)==2)
     except Exception:
         return False
 
-def correctness_check_1_5(jade_conclusions):
+def correctness_check_2_3(true_percentage_intervals):
     try:
-        return jade_conclusions.item(0) == 1 and jade_conclusions.item(1) == 2 and jade_conclusions.item(2) == 5
+        return bool(int(true_percentage_intervals) == 5700)
     except Exception:
         return False
     
-def correctness_check_2_2(vaccine_null):
+def correctness_check_2_4(cutoff_five_percent):
     try:
-        return vaccine_null == 1
-    except Exception:
-        return False
-
-def correctness_check_2_3(vaccine_alt):
-    try:
-        return vaccine_alt == 4
+        return bool(cutoff_five_percent == 1)
     except Exception:
         return False
     
-def correctness_check_2_4(valid_test_stat):
+def correctness_check_2_5(cutoff_one_percent):
     try:
-        return valid_test_stat == 4
+        return bool(cutoff_one_percent == 3)
     except Exception:
         return False
     
-def correctness_check_2_5(observed_statistic):
+def correctness_check_2_6(cutoff_ten_percent):
     try:
-        return np.isclose(observed_statistic, 6.352201257861637)
-    except Exception:
-        return False
-    
-def correctness_check_2_6(assumption_needed):
-    try:
-        return assumption_needed == 1
-    except Exception:
-        return False
-    
-def correctness_check_2_8(assumption_needed):
-    try:
-        return assumption_needed == 1
-    except Exception:
-        return False
-    
-def correctness_check_2_8(p_value):
-    try:
-        return 0.016 < p_value < 0.026
-    except Exception:
-        return False
-    
-def correctness_check_3_1(a,b,c,d,e):
-    try:
-        return a == 4 and b == 1 and c == 3 and d == 7 and e == 2
-    except Exception:
-        return False
-    
-def correctness_check_3_5(pvalue_answers):
-    try:
-        return sum(pvalue_answers == make_array(1,3)) == 2
-    except Exception:
-        return False
-
-def correctness_check_3_6(conclusion_answers):
-    try:
-        return sum(conclusion_answers == make_array(2,5)) == 2
-    except Exception:
-        return False
-    
-def correctness_check_4_1(num_females):
-    try:
-        return num_females == 260
-    except Exception:
-        return False
-    
-def correctness_check_4_2(avg_male_vs_female):
-    try:
-        return avg_male_vs_female == True
-    except Exception:
-        return False
-    
-def correctness_check_4_3(null_statement_number,alternative_statement_number):
-    try:
-        return (null_statement_number == 2) and (alternative_statement_number == 5)
-    except Exception:
-        return False
-    
-def correctness_check_4_6(observed_statistic_ab):
-    try:
-        return np.isclose(observed_statistic_ab, 1.314102564102562)
-    except Exception:
-        return False
-    
-def correctness_check_4_7(original_with_shuffled_labels):
-    try:
-        same_3_7 = original_with_shuffled_labels.column("Age") != original_with_shuffled_labels.column("Shuffled Label")
-        if type(same_3_7) == np.ndarray:
-            same_3_7 = all(same_3_7)
-        return same_3_7
-    except Exception:
-        return False
-    
-def correctness_check_4_10(simulated_statistics_ab):
-    try:
-        return len(simulated_statistics_ab) == 5000
-    except Exception:
-        return False
-    
-def correctness_check_4_11(p_val):
-    try:
-        return 0.10 < p_val < 0.15
-    except Exception:
-        return False
-    
-def conclusion_check(conclusion):
-    try:
-        return conclusion == 'The data are consistent with the null hypothesis.'
+        return bool(cutoff_ten_percent == 1)
     except Exception:
         return False
